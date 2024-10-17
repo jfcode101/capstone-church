@@ -2,18 +2,26 @@
   "name": "capstone-church",
   "version": "1.0.0",
   "description": "A small Church store website built using MERN stack.",
-  "main": "index.js",
+  "main": "server/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server/server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jfcode101/capstone-church.git"
   },
+  "type": "module",
   "author": "Dev JFD",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/jfcode101/capstone-church/issues"
   },
-  "homepage": "https://github.com/jfcode101/capstone-church#readme"
+  "homepage": "https://github.com/jfcode101/capstone-church#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "mongoose": "^8.7.1",
+    "nodemon": "^3.1.7"
+  }
 }
