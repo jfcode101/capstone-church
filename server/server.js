@@ -7,10 +7,10 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5050;
 
-app.use(express.json()); // accep json data in req.body
+app.use(express.json()); // accept json data in req.body
 
-app.post("api/products", async (req, res) => {
-  const product = req.body; // user inputs this data
+app.post("/api/products", async (req, res) => {
+  const product = req.body; // user will send the data  in the body
 
   if (
     !product.name ||
@@ -20,10 +20,10 @@ app.post("api/products", async (req, res) => {
   ) {
     return res.status(400).json({
       success: false,
-      message: "Missing required fields",
+      message: "Missing data, please check all fields.",
     });
   }
-  // new product
+  //  new product
   const newProduct = new Product(product);
   try {
     await newProduct.save();
@@ -32,9 +32,10 @@ app.post("api/products", async (req, res) => {
       data: newProduct,
     });
   } catch (err) {
+    console.log("Error while creating product", err);
     res.status(500).json({
       success: false,
-      message: "Server Error" + err.message,
+      message: "Internal Server Error",
     });
   }
 });
