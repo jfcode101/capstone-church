@@ -9,6 +9,24 @@ const PORT = process.env.PORT || 5050;
 
 app.use(express.json()); // accept json data in req.body
 
+// get all products
+app.get("/api/products", async (req, res) => {
+  try {
+    const products = await Product.find({});
+    res.status(200).json({
+      success: true,
+      data: products,
+    });
+  } catch (err) {
+    console.log("Error while fetching products", err);
+    res.status(500).json({
+      success: false,
+      message: "Internal Server Error",
+    });
+  }
+});
+
+//  add product to the db
 app.post("/api/products", async (req, res) => {
   const product = req.body; // user will send the data  in the body
 
@@ -37,6 +55,19 @@ app.post("/api/products", async (req, res) => {
       success: false,
       message: "Internal Server Error",
     });
+  }
+});
+
+// delete product from db
+app.delete("/api/products/:id", async (req, res) => {
+  const { id } = req.params;
+  console.log("id: ", id);
+  try {
+    await Product.findByIdAndDelete(id); // delete the product
+    res.status(200).json({ success: true, message: "Product deleted" }); // send response
+  } catch (err) {
+    console.log("Error while deleting product", err);
+    res.status(404).json({ success: false, message: "Product not found" }); // send response
   }
 });
 
