@@ -12,8 +12,5 @@ router.get("/", getProducts); // get all products
 router.post("/", createProduct); // add product to the db
 router.put("/:id", updateProduct); // update product
 router.delete("/:id", deleteProduct); // delete product from db
-router.get("/", (req, res) => {
-  res.send("Product Route");
-});
 
 export default router;
